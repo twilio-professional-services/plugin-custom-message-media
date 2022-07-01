@@ -69,6 +69,8 @@ twilio flex:plugins:start
 
 ## Sending a message with custom media
 
+Example using Flex UI Actions: See the included [CustomMediaAttachButton component](https://github.com/twilio-professional-services/plugin-custom-message-media/blob/main/src/components/CustomMediaAttachButton/CustomMediaAttachButton.jsx).
+
 Example using the Twilio CLI:
 
 ```bash
@@ -79,7 +81,7 @@ twilio api:conversations:v1:conversations:list
 twilio api:conversations:v1:conversations:messages:create --conversation-sid CHXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX --author Customer --body "media" --attributes "{\"hasMedia\":true,\"mediaUrl\":\"https://picsum.photos/600.jpg\"}"
 ```
 
-Example using the Conversations SDK:
+Example using Node.js:
 
 ```
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
@@ -99,7 +101,15 @@ client.conversations.conversations('CHXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
                     .then(message => console.log(message.sid));
 ```
 
-Example using Flex UI Actions: See the included [CustomMediaAttachButton component](https://github.com/twilio-professional-services/plugin-custom-message-media/blob/main/src/components/CustomMediaAttachButton/CustomMediaAttachButton.jsx).
+Example using the Conversations JavaScript SDK:
+
+```
+await testConversation.prepareMessage()
+  .setBody('media')
+  .setAttributes({hasMedia: true, mediaUrl: 'https://picsum.photos/600.jpg'})
+  .build()
+  .send();
+```
 
 The message will then be rendered in Flex using the custom component from this plugin:
 
