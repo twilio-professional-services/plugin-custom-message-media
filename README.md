@@ -76,8 +76,30 @@ Example using the Twilio CLI:
 twilio api:conversations:v1:conversations:list
 
 # Send message with media flag and URL
-twilio api:conversations:v1:conversations:messages:create --conversation-sid CHxxxxxxxxxx --author Customer --body "media" --attributes "{\"hasMedia\":true,\"mediaUrl\":\"https://picsum.photos/600.jpg\"}"
+twilio api:conversations:v1:conversations:messages:create --conversation-sid CHXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX --author Customer --body "media" --attributes "{\"hasMedia\":true,\"mediaUrl\":\"https://picsum.photos/600.jpg\"}"
 ```
+
+Example using the Conversations SDK:
+
+```
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
+
+client.conversations.conversations('CHXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+                    .messages
+                    .create({
+                      author: 'Customer',
+                      body: 'media',
+                      attributes: JSON.stringify({
+                        hasMedia: true,
+                        mediaUrl: 'https://picsum.photos/600.jpg'
+                      })
+                    })
+                    .then(message => console.log(message.sid));
+```
+
+Example using Flex UI Actions: See the included [CustomMediaAttachButton component](https://github.com/twilio-professional-services/plugin-custom-message-media/blob/main/src/components/CustomMediaAttachButton/CustomMediaAttachButton.jsx).
 
 The message will then be rendered in Flex using the custom component from this plugin:
 
