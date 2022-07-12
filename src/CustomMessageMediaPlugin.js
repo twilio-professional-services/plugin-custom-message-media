@@ -28,7 +28,7 @@ export default class CustomMessageMediaPlugin extends FlexPlugin {
     });
     
     flex.MessageInputActions.Content.remove("attach-file-button");
-    flex.MessageInputActions.Content.add(<CustomMediaAttachButton key="CustomMediaAttachButton-component" />, {
+    flex.MessageInputActions.Content.add(<CustomMediaAttachButton key="CustomMediaAttachButton-component" manager={manager} />, {
       align: 'start'
     });
   }
